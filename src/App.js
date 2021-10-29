@@ -3,11 +3,6 @@ import React, {useState, useEffect} from "react";
 import Recipe from './components/recipes/Recipe';
 import { Row } from 'react-bootstrap';
 
-
-// const query = 'chicken';
-// const app_id = '1823a3dc';
-// const app_key = '04f5246a78c24cc42e21758d51bbb1e7';
-
 const recipeCards = {
    width: '130px'
 }
@@ -17,7 +12,7 @@ function App() {
 
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch]= useState('');
-    const [query, setQuery] = useState('pho');
+    const [query, setQuery] = useState('');
 
     const fetchRecipes = async () => {
         const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=8f7859bc&app_key=f7c43e28aea5bc242e86fe0f089dda3c&from0&to=10`)
@@ -38,7 +33,7 @@ function App() {
 
     useEffect(() => {
       fetchRecipes();
-    }, [])   
+    }, [query])   
   
   return (
     <div className="App results-container" style={{width: '90%', margin: 'auto'}}>
@@ -58,3 +53,8 @@ function App() {
 }
 
 export default App;
+
+/*
+{recipes !== [] && recipes.map((recipe, index) => <Recipe recipe={recipe} key={index} />)}
+^ code is to loop each recipe card until it shows all the results
+*/
