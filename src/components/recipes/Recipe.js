@@ -3,15 +3,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button, Col, Form } from 'react-bootstrap';
 
 
+<<<<<<< HEAD
 const Recipe = ({ recipe }) => {
 
     const [showIngredients, setShowIngredients] = useState(false);
     const onClick = () => setShowIngredients(true)
 
     const { label, image, url, totalTime, calories, ingredients } = recipe.recipe;
+=======
+
+const Recipe = ({ recipe}) => {
+    const [show, setShow] = useState(false);
+    const { label, image, url, ingredients, totalTime, calories } = recipe.recipe;
+    const caloriesRounded = calories.toFixed(0);
+>>>>>>> develop
 
     const caloriesRounded = calories.toFixed(0);
     
+<<<<<<< HEAD
     const Ingredients = ({ ingredients}) => {
         return ingredients.map(ingredient => {
             return (
@@ -27,6 +36,10 @@ const Recipe = ({ recipe }) => {
 
   
     return (
+=======
+ return (
+      
+>>>>>>> develop
       <Col>
             <Card>
                 <Card.Img src={image} alt={label} className="card-img-top"/>
@@ -37,6 +50,7 @@ const Recipe = ({ recipe }) => {
                     Go to recipe
                     </a><br/><br/>
                     
+<<<<<<< HEAD
                     <Button onClick={onClick}>View Ingredients</Button>
                     <br/><br/>
                     {showIngredients ? 
@@ -46,6 +60,18 @@ const Recipe = ({ recipe }) => {
                         </Form>
                         : null}
                     
+=======
+                    <Button onClick={() => setShow(!show)}>View Ingredients</Button>
+                    {show && 
+                        <div>
+                            <br/>
+                            <RecipeInfo ingredients={ingredients} /><br/>
+                            <Button>ADD TO LIST</Button>
+                        </div>
+                        
+                        
+                    }
+>>>>>>> develop
                 </Card.Body>
             </Card>
         </Col>
