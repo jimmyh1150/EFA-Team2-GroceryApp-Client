@@ -3,11 +3,6 @@ import React, {useState, useEffect} from "react";
 import Recipe from './components/recipes/Recipe';
 import { Row } from 'react-bootstrap';
 
-
-// const query = 'chicken';
-// const app_id = '1823a3dc';
-// const app_key = '04f5246a78c24cc42e21758d51bbb1e7';
-
 const recipeCards = {
    width: '130px'
 }
