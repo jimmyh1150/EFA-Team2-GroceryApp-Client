@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import Recipe from './components/recipes/Recipe';
 import { Row } from 'react-bootstrap';
 
+
 const recipeCards = {
    width: '130px'
 }
@@ -15,7 +16,7 @@ function App() {
     const [query, setQuery] = useState('pho');
 
     const fetchRecipes = async () => {
-        const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=8f7859bc&app_key=f7c43e28aea5bc242e86fe0f089dda3c&from0&to=10`)
+        const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=8f7859bc&app_key=f7c43e28aea5bc242e86fe0f089dda3c&from0&to=5`)
         const data = await response.json();
         setRecipes(data.hits);
     }
@@ -33,7 +34,7 @@ function App() {
 
     useEffect(() => {
       fetchRecipes();
-    }, [])   
+    }, [query])   
   
   return (
     <div className="App results-container" style={{width: '90%', margin: 'auto'}}>
