@@ -64,18 +64,24 @@ function App() {
     
     useEffect(() => {
       fetchRecipes();
-    }, [query, pagination])   
-  
+    }, [query, pagination]) 
+    
+    
+    
   return (
     <div className="App results-container" style={{width: '90%', margin: 'auto'}}>
       <form onSubmit={getSearch} className="search-form">
-        <input className="search-bar" type="text" value={search} onChange={updateSearch} />
+        <input className="search-bar" type="text" placeholder="Search recipes" value={search} onChange={updateSearch} />
         <button className="search-button" type="submit">Search</button>
       </form>
       <br/>
       <h2>Your search results:</h2>
+      
       <div className={recipeCards}>
+      
         <Row xs={1} md={5} className="g-4">
+        
+        
             {recipes !== [] && recipes.map((recipe, index) => <Recipe  recipe={recipe} key={index} />)}
         </Row>
         
