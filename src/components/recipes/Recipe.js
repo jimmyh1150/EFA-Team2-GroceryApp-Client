@@ -4,15 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button, Col } from 'react-bootstrap';
 
 
-const Recipe = ({ recipe }) => {
+
+const Recipe = ({ recipe}) => {
     const [show, setShow] = useState(false);
     const { label, image, url, ingredients, totalTime, calories } = recipe.recipe;
-
     const caloriesRounded = calories.toFixed(0);
 
     
-
-  return (
+ return (
+      
       <Col>
             <Card>
                 <Card.Img src={image} alt={label} className="card-img-top"/>
@@ -30,6 +30,8 @@ const Recipe = ({ recipe }) => {
                             <RecipeInfo ingredients={ingredients} /><br/>
                             <Button>ADD TO LIST</Button>
                         </div>
+                        
+                        
                     }
                 </Card.Body>
             </Card>

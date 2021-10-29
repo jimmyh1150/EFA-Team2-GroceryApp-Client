@@ -6,6 +6,8 @@ const RecipesReturned = ({title, image}) => {
         <div>
             <h1>{title}</h1>
             <img src={image} alt=""/>
+            <p>Prev</p>
+            <p>Next</p>
         </div>
     );
 }
