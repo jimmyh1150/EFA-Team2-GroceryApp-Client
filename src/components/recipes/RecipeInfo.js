@@ -1,7 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Checkbox from 'react-checkbox-component';
-import { propTypes } from "react-bootstrap/esm/Image";
 
 
 const RecipeInfo = ({ ingredients }) => {

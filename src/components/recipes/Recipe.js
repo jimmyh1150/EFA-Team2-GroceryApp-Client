@@ -10,6 +10,8 @@ const Recipe = ({ recipe }) => {
 
     const caloriesRounded = calories.toFixed(0);
 
+    
+
   return (
       <Col>
             <Card>
