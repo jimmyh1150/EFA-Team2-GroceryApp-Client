@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Recipe from './components/recipes/Recipe';
 import { Row } from 'react-bootstrap';
 
@@ -15,12 +15,27 @@ function App() {
     const [search, setSearch]= useState('');
     const [query, setQuery] = useState('pho');
     const [pagination, setPagination] = useState(0);
-  
+
+    const prevSearchIdRef = useRef();
+    useEffect(()=>{
+      prevSearchIdRef.current = query;
+    });
+    const prevSearch = prevSearchIdRef.current
+
+    let currentPagination = pagination;
 
     const fetchRecipes = async () => {
-        const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=8f7859bc&app_key=f7c43e28aea5bc242e86fe0f089dda3c&from${pagination}&to=${pagination + 5}`)
-        const data = await response.json();
-        setRecipes(data.hits);
+      
+    if(prevSearch !== query){
+      currentPagination = 0;
+      setPagination(0);
+    }
+
+    
+
+    const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=8f7859bc&app_key=f7c43e28aea5bc242e86fe0f089dda3c&from${currentPagination}&to=${pagination + 5}`)
+    const data = await response.json();
+    setRecipes(data.hits);
     }
 
     const updateSearch = e => {
@@ -45,6 +60,7 @@ function App() {
       setPagination(pagination+5);
   }
 
+ 
     
     useEffect(() => {
       fetchRecipes();
