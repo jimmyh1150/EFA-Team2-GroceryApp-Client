@@ -87,8 +87,8 @@ function App() {
         
       </div>
         <div>
-          <p onClick={prevClick}>Prev</p>
-          <p onClick={nextClick}>Next</p>
+          <button onClick={prevClick}>Prev</button>
+          <button onClick={nextClick}>Next</button>
         </div>
     </div>
   );
