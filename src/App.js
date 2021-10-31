@@ -1,19 +1,15 @@
 import './App.css';
 import React, {useState, useEffect, useRef} from "react";
-import Recipe from './components/recipes/Recipe';
-import { Row } from 'react-bootstrap';
+import Recipe from './components/recipes/Recipe.jsx';
+import { Row, Col } from 'react-bootstrap';
 
-
-const recipeCards = {
-   width: '130px'
-}
 
 
 function App() {
 
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch]= useState('');
-    const [query, setQuery] = useState('pho');
+    const [query, setQuery] = useState('');
     const [pagination, setPagination] = useState(0);
 
     const prevSearchIdRef = useRef();
@@ -69,22 +65,28 @@ function App() {
     
     
   return (
-    <div className="App results-container" style={{width: '90%', margin: 'auto'}}>
-      <form onSubmit={getSearch} className="search-form">
-        <input className="search-bar" type="text" placeholder="Search recipes" value={search} onChange={updateSearch} />
-        <button className="search-button" type="submit">Search</button>
-      </form>
+    <div className="App">
+      <div className="Nav">NAV BAR COMPONENT HERE</div>
+      
+      <div className="search-container">
+        <form onSubmit={getSearch} className="search-form">
+          <input className="search-bar" type="text" placeholder="Search recipes" value={search} onChange={updateSearch} />
+          <button className="search-button" type="submit">Search</button>
+        </form>
+      </div>
+
       <br/>
-      <h2>Your search results:</h2>
+      <h2>Your search results for "{query}"</h2>
       
-      <div className={recipeCards}>
-      
-        <Row xs={1} md={5} className="g-4">
-        
-        
-            {recipes !== [] && recipes.map((recipe, index) => <Recipe  recipe={recipe} key={index} />)}
-        </Row>
-        
+      <div className="recipeList">
+        {recipes?.length ? ( 
+            <Row>
+                {recipes !== [] && recipes.map((recipe, index) => <Col><Recipe  recipe={recipe.recipe} key={index} /></Col>)}
+            </Row>
+            ):(
+              <div>No recipes found. Please try another search.</div>
+            )
+        }
       </div>
         <div>
           <button onClick={prevClick}>Prev</button>

@@ -1,11 +1,11 @@
 import React from "react";
 
 
-const RecipeSearch = props => {
-    const {search, onInputChange}= props;
+const RecipeSearch = ({onChange, placeholder}) => {
 
+  
     return (
-       <div classname="jumbotron py-5" style="{{backgroundColor:&quot;#969696;&quot;}}">  
+       <div classname="jumbotron py-5">  
           <h4 classname="display-4">
           <span classname="material-icons brand-icon">fastfood</span> Food Recipe</h4>
           
