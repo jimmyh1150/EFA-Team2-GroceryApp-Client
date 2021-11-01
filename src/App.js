@@ -2,7 +2,8 @@ import './App.css';
 import React, {useState, useEffect, useRef} from "react";
 import Recipe from './components/recipes/Recipe.jsx';
 import { Row, Col } from 'react-bootstrap';
-
+import UserSignUp from './components/auth/Login';
+import Auth from './components/auth/Login';
 
 
 function App() {
@@ -67,7 +68,10 @@ function App() {
   return (
     <div className="App">
       <div className="Nav">NAV BAR COMPONENT HERE</div>
+      <div className="LoginSect">LOGIN BUTTON HERE
+      <Auth/>
       
+      </div>
       <div className="search-container">
         <form onSubmit={getSearch} className="search-form">
           <input className="search-bar" type="text" placeholder="Search recipes" value={search} onChange={updateSearch} />
