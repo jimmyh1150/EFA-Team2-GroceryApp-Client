@@ -2,8 +2,13 @@ import './App.css';
 import React, {useState, useEffect, useRef} from "react";
 import Recipe from './components/recipes/Recipe.jsx';
 import { Row, Col } from 'react-bootstrap';
+<<<<<<< HEAD
 import GroceryList from './components/grocerylist/GroceryList';
 import ListIcon from './components/assets/list-2.png';
+=======
+
+
+>>>>>>> 38f4bfb849d43cf44be260bbdc82b5561aad5c27
 
 function App() {
 
@@ -66,15 +71,25 @@ function App() {
     
   return (
     <div className="App">
+<<<<<<< HEAD
       <div className="NavBar">NAV BAR COMPONENT HERE</div>
       <div className="search-container">
         <form onSubmit={getSearch} className="search-form">
           <input className="search-bar" type="text" placeholder="Search recipes" value={search} onChange={updateSearch} />
           <button className="searchBTN" type="submit"></button>
+=======
+      <div className="Nav">NAV BAR COMPONENT HERE</div>
+      
+      <div className="search-container">
+        <form onSubmit={getSearch} className="search-form">
+          <input className="search-bar" type="text" placeholder="Search recipes" value={search} onChange={updateSearch} />
+          <button className="search-button" type="submit">Search</button>
+>>>>>>> 38f4bfb849d43cf44be260bbdc82b5561aad5c27
         </form>
       </div>
 
       <br/>
+<<<<<<< HEAD
       <h2 className="searchTEXT">You searched for "{query}"</h2>
       <br/>
       <div className="results-container">
@@ -100,6 +115,19 @@ function App() {
             </div>}
           <button onClick={() => setVisible(!visible)} className="listBTN">
             <img src={ListIcon} className="ListIcon" alt="list"/></button>
+=======
+      <h2>Your search results for "{query}"</h2>
+      
+      <div className="recipeList">
+        {recipes?.length ? ( 
+            <Row>
+                {recipes !== [] && recipes.map((recipe, index) => <Col><Recipe  recipe={recipe.recipe} key={index} /></Col>)}
+            </Row>
+            ):(
+              <div>No recipes found. Please try another search.</div>
+            )
+        }
+>>>>>>> 38f4bfb849d43cf44be260bbdc82b5561aad5c27
       </div>
 
       
