@@ -1,5 +1,4 @@
 import React from 'react';
-import './grocerylist.css';
 
 const DisplayList = (props) => {
     return (
