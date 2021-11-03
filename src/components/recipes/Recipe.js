@@ -22,7 +22,7 @@ const Recipe = (props) => {
             body: JSON.stringify({grocerylist: {item: AddItem}}),
             headers: new Headers ({
                 'Content-Type': 'application/json',
-                'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjM1NzgyNTM0LCJleHAiOjE2MzU4Njg5MzR9.o6P90SCtfmXeXnc9EMSZTpzaO43HKHCOW10OIHjrLrM'
+                'Authorization': props.token
             })
         }).then( (res) => res.json())
             .then((Item)=> {
@@ -31,7 +31,6 @@ const Recipe = (props) => {
             })
     }
     
-
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
