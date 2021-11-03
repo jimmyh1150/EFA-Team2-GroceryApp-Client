@@ -12,8 +12,3 @@ const handleSubmit = (event) => {
     event.preventDefault();
     var UserLogin = event.target.value;
     console.log(UserLogin);
-<div>
-<background goes here>
-   <div>
-   </div>
-</div>

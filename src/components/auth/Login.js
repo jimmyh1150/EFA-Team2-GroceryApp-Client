@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {  Button, Form, Image } from 'react-bootstrap';
+import './login_registration.css';
+ 
 
 const Auth = (props) => {
 //    variable name, functionname = initial value
@@ -25,7 +29,9 @@ const loginToggle = (e) => {
 
 const signupFields = () => !login ?
 (
-    <div>
+<div>
+
+                
         <label html4="firstName">First Name:</label>
         <br/>
         <input type='text' id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
@@ -38,6 +44,8 @@ const signupFields = () => !login ?
 ) : null
 
 const handleSubmit = event => {
+
+    console.log(handleSubmit)
     event.preventDefault();
 
     let reqBody = login ?
@@ -64,15 +72,15 @@ const handleSubmit = event => {
         })
     })
     .then(response => response.json())
-    //.then(json => props.updateLocalStorage(json.token))
+    .then(json => props.updateToken(json.token))
     .catch(err => console.log(err))
 
 }
     
+    return ( 
+        <div className="Background_Image">
 
-    return (
-        <div>
-            <form>
+           <form>
                 <button onClick={loginToggle}>Login / Signup Toggle</button>
                 <br/>
                 <h1>{title()}</h1>
