@@ -73,7 +73,7 @@ const Recipe = (props) => {
                 
             </Modal>
         
-      </div>  
+      </div> 
     );
 };
 
