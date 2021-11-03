@@ -12,7 +12,7 @@ const GroceryList = (props) => {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type': 'application/json',
-                'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjM1NzkxNTE0LCJleHAiOjE2MzU4Nzc5MTR9.ZpavJr1kkXpkv-jKwAOs9Flp9J7A56aTsNgtr-5o8Q0'
+                'Authorization': props.token
             })
         })
         .then(response => response.json())
@@ -31,7 +31,8 @@ const GroceryList = (props) => {
             <DisplayList Items={Items} />
         </div>
     )
-    
 };
+
+
 
 export default GroceryList;
