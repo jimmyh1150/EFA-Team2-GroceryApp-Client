@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 
-const DisplayList = (props) => 
+const DisplayList = (props) => {
     const [Items, setItems] = useState([])
-    
+
     const deleteItem = (Item) => {
         console.log("ItemID:",Item.id)
         console.log("ItemName:",Item)
 
         const id = Item.id
-        
+
         fetch(`http://localhost:4000/grocerylist/${id}`, { 
             method: 'DELETE',
             headers: new Headers({
@@ -25,7 +25,7 @@ const DisplayList = (props) =>
             { props.Items.map((Item) => 
                 <div style={{alignItems:"left"}}>
                 <li htmlFor={Item.item}>
-                    <button>-</button> {Item.item}
+                    <button onClick={() => deleteItem(Item)}>-</button> {Item.item}
                 </li>
                 </div>
             )}
@@ -41,5 +41,5 @@ export default DisplayList;
 - "item" array is displayed as a numbered list.
 - Line 25: in Items array, set Item array to a loop and display in a numbered list
 - Line 28: on click, run delete item while passing in Item
-- Use Item to get to "id", which is used in the fetch then deleted in the databas
+- Use Item to get to "id", which is used in the fetch then deleted in the database
 */

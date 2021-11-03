@@ -103,4 +103,9 @@
     background-color: #EFF8E2;
     box-shadow: #EFF8E2 0 0 7px;
   }
-  
+  .recipeList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 0 16px;
+}
