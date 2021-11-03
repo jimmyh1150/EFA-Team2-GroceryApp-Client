@@ -19,7 +19,7 @@ function App() {
     fetchRecipes();
   }, [query, pagination]);
 
-  const recipeLimit = 5;
+  const recipeLimit = 8;
   const fetchRecipes = async () => {
     let from = pagination * recipeLimit;
     if (requestMetaRef.current.query !== query && pagination > 0) {
@@ -103,7 +103,7 @@ function App() {
       </div>
 
       <br />
-      {!!query && <h2>Your search results for "{query}"</h2>}
+      {!!query && <h2>Your search results for "{query}"</h2>} 
 
       <div className="recipeList">
         {paginatedRecipes?.length > 0 && (
@@ -118,10 +118,10 @@ function App() {
         )}
       </div>
       {paginatedRecipes?.length > 0 && ( <div>
-        <button onClick={() => setPagination(0)}>{'<<<'}</button>
+        {/* <button onClick={() => setPagination(0)}>{'<<<'}</button> */}
         <button onClick={prevClick}>Prev</button>
         <button onClick={nextClick}>Next</button>
-        <button onClick={handleNavigateLastPage}>{'>>>'}</button>
+        {/* <button onClick={handleNavigateLastPage}>{'>>>'}</button> */}
       </div>)}
     </div>
   );
