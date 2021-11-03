@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {  Button, Form, Image } from 'react-bootstrap';
-import './login_registration.css';
+
  
 
 const Auth = (props) => {
@@ -77,17 +77,18 @@ const handleSubmit = event => {
 
 }
     
-    return ( 
-        <div className="Background_Image">
+    
 
-           <form>
-                <button onClick={loginToggle}>Login / Signup Toggle</button>
+    return (
+        <div>
+            <form>
+                <button onClick={loginToggle}>Login / Signup</button>
                 <br/>
                 <h1>{title()}</h1>
                 {signupFields()}
                 <label html4="email">Email</label>
                 <br/>
-                <input type='text' id="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                <input type='email' id="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                 <br/>
                 <label html4="password">password</label>
                 <br/>
@@ -99,7 +100,6 @@ const handleSubmit = event => {
 
         </div>
     )
-
 }
 
 export default Auth;
