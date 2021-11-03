@@ -37,7 +37,7 @@ const Recipe = (props) => {
     const handleClose = () => setShow(false);
     
     return (
-      <div>
+      <>
             <Card style={{border:"none",boxShadow:"2px 5px 5px #000000"}}>
                 <Card.Img src={image} alt={label} className="card-img-top"/>
                 <Card.Body className="card-body">
@@ -74,7 +74,7 @@ const Recipe = (props) => {
                 </Modal.Body>
             </Modal>
         
-      </div>  
+      </>  
     );
 };
 
@@ -83,7 +83,4 @@ export default Recipe;
 /*
 {showIngredients ? . . . 
 ^ Code for viewing ingredients. On SHOW, show each ingredient & show ADD button; but don't know how to hide the Ingredients again
-
-
-
 */

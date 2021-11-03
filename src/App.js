@@ -1,110 +1,128 @@
-import './App.css';
-import React, {useState, useEffect, useRef} from "react";
-import Recipe from './components/recipes/Recipe.jsx';
-import { Row, Col } from 'react-bootstrap';
-import GroceryList from './components/grocerylist/GroceryList';
-import ListIcon from './components/assets/list-2.png';
+import "./App.css";
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import Recipe from "./components/recipes/Recipe.jsx";
+import { Row, Col } from "react-bootstrap";
 
 function App() {
+  const [recipes, setRecipes] = useState([]);
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [pagination, setPagination] = useState(0);
+  const requestMetaRef = useRef({});
+  // const prevSearchIdRef = useRef();
+  // useEffect(() => {
+  //   prevSearchIdRef.current = search;
+  // }, [search]);
+  // const currSearch = prevSearchIdRef.current;
 
-    const [recipes, setRecipes] = useState([]);
-    const [search, setSearch]= useState('');
-    const [query, setQuery] = useState('');
-    const [pagination, setPagination] = useState(0);
+  useEffect(() => {
+    fetchRecipes();
+  }, [query, pagination]);
 
-    const prevSearchIdRef = useRef();
-    useEffect(()=>{
-      prevSearchIdRef.current = query;
-    });
-    const prevSearch = prevSearchIdRef.current
-
-    let currentPagination = pagination;
-
-    const fetchRecipes = async () => {
-      
-    if(prevSearch !== query){
-      currentPagination = 0;
+  const recipeLimit = 5;
+  const fetchRecipes = async () => {
+    let from = pagination * recipeLimit;
+    if (requestMetaRef.current.query !== query && pagination > 0) {
+      from = 0;
       setPagination(0);
     }
 
-    
+    const to = from + recipeLimit;
 
-    const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=8f7859bc&app_key=f7c43e28aea5bc242e86fe0f089dda3c&from${currentPagination}&to=${pagination + 5}`)
+    const response = await fetch(
+      `https://api.edamam.com/search?q=${query}&app_id=8f7859bc&app_key=f7c43e28aea5bc242e86fe0f089dda3c&from${from}&to=${to}`
+    );
     const data = await response.json();
-    setRecipes(data.hits);
+    requestMetaRef.current = {
+      from,
+      to,
+      query: data.q,
+      count: data.count,
+      more: data.more,
+    };
+    setRecipes(data.hits || []);
+  };
+
+  const updateSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setQuery(search);
+    setSearch("");
+  };
+
+  const prevClick = () => {
+    if (pagination === 0) {
+      return;
     }
-
-    const updateSearch = e => {
-      setSearch(e.target.value);
-      };
-
-
-    const getSearch = e => {
-      e.preventDefault();
-      setQuery(search);
-      setSearch('');
-    }
-
-    const prevClick = () => {
-      if(pagination === 0){
-          return;
-      }
-      setPagination(pagination-5);
-  }
+    setPagination(pagination - 1);
+  };
 
   const nextClick = () => {
-      setPagination(pagination+5);
+    if (requestMetaRef.current.more) {
+      setPagination(pagination + 1);
+    }
+  };
+  const handleNavigateLastPage = () => {
+    if (!requestMetaRef.current.count) {
+      return
+    }
+    const totalPages = Math.floor(requestMetaRef.current.count / recipeLimit) - 1 // -1 so we dont start the request at the max value. we want the last page
+    setPagination(totalPages)
   }
 
- 
-    
-    useEffect(() => {
-      fetchRecipes();
-    }, [query, pagination]) 
-    
-    const [visible, setVisible] = useState(false);
-    
+  const paginatedRecipes = useMemo(() => {
+    if (recipes.length > 0 && recipes.length === requestMetaRef.current.to) {
+      return recipes.slice(
+        requestMetaRef.current.from,
+        requestMetaRef.current.to
+      );
+    }
+    return recipes;
+  }, [recipes]);
+
   return (
     <div className="App">
-      <div className="NavBar">NAV BAR COMPONENT HERE</div>
+      <div className="Nav">NAV BAR COMPONENT HERE</div>
+
       <div className="search-container">
-        <form onSubmit={getSearch} className="search-form">
-          <input className="search-bar" type="text" placeholder="Search recipes" value={search} onChange={updateSearch} />
-          <button className="searchBTN" type="submit"></button>
+        <form onSubmit={handleFormSubmit} className="search-form">
+          <input
+            className="search-bar"
+            type="text"
+            placeholder="Search recipes"
+            value={search}
+            onChange={updateSearch}
+          />
+          <button className="search-button" type="submit">
+            Search
+          </button>
         </form>
       </div>
 
-      <br/>
-      <h2 className="searchTEXT">You searched for "{query}"</h2>
-      <br/>
-      <div className="results-container">
-        {recipes?.length ? ( 
-            <Row className="results-row">
-                {recipes !== [] && recipes.map((recipe, index) => <Col><Recipe  recipe={recipe.recipe} key={index} /></Col>)}
-            </Row>
-            ):(
-              <div>No recipes found. Please try another search.</div>
-            )
-        }
+      <br />
+      {!!query && <h2>Your search results for "{query}"</h2>}
+
+      <div className="recipeList">
+        {paginatedRecipes?.length > 0 && (
+          <>
+            {paginatedRecipes.map((recipe, index) => (
+              <Recipe recipe={recipe.recipe} key={index} />
+            ))}
+          </>
+        )}
+        {paginatedRecipes.length === 0 && !!query && (
+          <div>No recipes found. Please try another search.</div>
+        )}
       </div>
-      
-      <div>
+      {paginatedRecipes?.length > 0 && ( <div>
+        <button onClick={() => setPagination(0)}>{'<<<'}</button>
         <button onClick={prevClick}>Prev</button>
         <button onClick={nextClick}>Next</button>
-      </div><br/>
-      <div style={{position:"fixed",bottom:"30px",right:"35px"}}>
-          {visible && 
-            <div style={{backgroundColor:"#EFF8E2",position:"absolute",bottom:"70px",right:"0",borderRadius:"15px 0 0 15px",height:"500px",transition:"all 1.5s ease-in-out"}}>
-                <div>My Grocery List</div>
-                <GroceryList/>
-            </div>}
-          <button onClick={() => setVisible(!visible)} className="listBTN">
-            <img src={ListIcon} className="ListIcon" alt="list"/></button>
-      </div>
-
-      
-      <div className="footer">FOOTER HERE</div>
-
+        <button onClick={handleNavigateLastPage}>{'>>>'}</button>
+      </div>)}
     </div>
   );
 }
