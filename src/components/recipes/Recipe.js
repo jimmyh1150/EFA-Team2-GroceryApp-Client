@@ -12,7 +12,6 @@ const Recipe = (props) => {
     const caloriesRounded = calories.toFixed(0);
     const [Item, setItem] = useState([]);
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
         var AddItem = event.target.value;
@@ -83,7 +82,4 @@ export default Recipe;
 /*
 {showIngredients ? . . . 
 ^ Code for viewing ingredients. On SHOW, show each ingredient & show ADD button; but don't know how to hide the Ingredients again
-
-
-
 */

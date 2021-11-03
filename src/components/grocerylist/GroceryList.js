@@ -21,7 +21,6 @@ const GroceryList = (props) => {
     } 
     console.log(Items)
     
-
     useEffect(() => {
         fetchItems();
     }, [])
@@ -32,7 +31,5 @@ const GroceryList = (props) => {
         </div>
     )
 };
-
-
 
 export default GroceryList;
