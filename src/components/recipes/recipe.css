@@ -1,0 +1,35 @@
+.recipeList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 0 16px;
+}
+
+.card {
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+}
+
+.cards-container{
+    height: 400px;
+}
+.card-custom{
+    background-color: red;
+}
+.card-image{
+    opacity: 0.2;
+}
+.btn-custom{
+    background-color: #DF6B51;
+    border-radius: 50px;
+    font-weight: bolder;
+}
+.btn-custom:hover{
+    transform: scale(1.2);
+}
+.card-body{
+
+}
+
+/*style={{backgroundColor:"#DF6B51", border:"none", borderRadius:"50px", color:"black", width:"200px"}}
+*/
