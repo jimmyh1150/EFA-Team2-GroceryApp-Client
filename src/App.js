@@ -2,9 +2,8 @@ import './App.css';
 import React, {useState, useEffect, useRef} from "react";
 import Recipe from './components/recipes/Recipe.jsx';
 import { Row, Col } from 'react-bootstrap';
-import UserSignUp from './components/auth/Login';
-import Auth from './components/auth/Login';
-
+import GroceryList from './components/grocerylist/GroceryList';
+import ListIcon from './components/assets/list-2.png';
 
 function App() {
 
@@ -63,28 +62,24 @@ function App() {
       fetchRecipes();
     }, [query, pagination]) 
     
-    
+    const [visible, setVisible] = useState(false);
     
   return (
     <div className="App">
-      <div className="Nav">NAV BAR COMPONENT HERE</div>
-      <div className="LoginSect">LOGIN BUTTON HERE
-      <Auth/>
-      
-      </div>
+      <div className="NavBar">NAV BAR COMPONENT HERE</div>
       <div className="search-container">
         <form onSubmit={getSearch} className="search-form">
           <input className="search-bar" type="text" placeholder="Search recipes" value={search} onChange={updateSearch} />
-          <button className="search-button" type="submit">Search</button>
+          <button className="searchBTN" type="submit"></button>
         </form>
       </div>
 
       <br/>
-      <h2>Your search results for "{query}"</h2>
-      
-      <div className="recipeList">
+      <h2 className="searchTEXT">You searched for "{query}"</h2>
+      <br/>
+      <div className="results-container">
         {recipes?.length ? ( 
-            <Row>
+            <Row className="results-row">
                 {recipes !== [] && recipes.map((recipe, index) => <Col><Recipe  recipe={recipe.recipe} key={index} /></Col>)}
             </Row>
             ):(
@@ -92,10 +87,24 @@ function App() {
             )
         }
       </div>
-        <div>
-          <button onClick={prevClick}>Prev</button>
-          <button onClick={nextClick}>Next</button>
-        </div>
+      
+      <div>
+        <button onClick={prevClick}>Prev</button>
+        <button onClick={nextClick}>Next</button>
+      </div><br/>
+      <div style={{position:"fixed",bottom:"30px",right:"35px"}}>
+          {visible && 
+            <div style={{backgroundColor:"#EFF8E2",position:"absolute",bottom:"70px",right:"0",borderRadius:"15px 0 0 15px",height:"500px",transition:"all 1.5s ease-in-out"}}>
+                <div>My Grocery List</div>
+                <GroceryList/>
+            </div>}
+          <button onClick={() => setVisible(!visible)} className="listBTN">
+            <img src={ListIcon} className="ListIcon" alt="list"/></button>
+      </div>
+
+      
+      <div className="footer">FOOTER HERE</div>
+
     </div>
   );
 }

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #483D3F;
 }
 
 .App-logo {
@@ -38,7 +39,77 @@
 }
 
 
-.recipeList{
-  width: 90%;
+.testing{
+  align-items: left;
+}
+
+
+/* NAV BAR & FOOTER */
+.NavBar{
+  background-color: grey;
+  height: 50px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+.footer{
+  background-color: grey;
+  height: 50px;
+}
+/* SEARCH */
+.search-container{
+  background-image: url('components/assets/Landing_Page.png');
+  background-size: 100% 700px;
+  background-repeat: no-repeat;
+  height: 700px;
+  background-color: #483D3F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-bar{
+  width: 250px;
+  background-color: transparent;
+  border: none;
+  width: 40rem;
+  border-radius: 30px 0 0 30px;
+  outline: none;
+  font-size: larger;
+  padding-left: 20px;
+}
+.search-form{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  display: inline-flex;
+  background-color: whitesmoke;
+  border-radius: 30px;
+  height: 60px;
+  align-items: center;
+}
+.searchBTN{
+  background-image: url('components/assets/Search_Icon.png');
+  background-size: cover;
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  border-style: none;
+  margin-right: 20px;
+}
+.searchBTN:hover{
+  transform: scale(1.2);
+}
+.results-container{
+  width: 95%;
   margin: auto;
+}
+.listBTN{
+  background-color: transparent;
+  border: none;
+}
+.ListIcon{  
+  height: 60px;
+  border-radius: 50%;
+  background-color: #EFF8E2;
+  box-shadow: #EFF8E2 0 0 7px;
 }
