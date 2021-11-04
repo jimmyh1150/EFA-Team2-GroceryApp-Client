@@ -27,7 +27,7 @@ const GroceryList = (props) => {
     
     return(
         <div style={{height:"450px",overflowY:"auto"}}>
-            <DisplayList Items={Items} />
+            <DisplayList Items={Items} token={props.token}/>
         </div>
     )
 };

@@ -3,6 +3,7 @@ import React, {useState, useEffect, useRef} from "react";
 import NavbarNav from './components/navbar/Navbar';
 import Auth from './components/auth/Login';
 import RecipeSearch from './components/recipesearch/RecipeSearch';
+import Footer from './components/navbar/Footer';
 
 function App() {
 
@@ -32,9 +33,9 @@ function App() {
 
     return (
         <div className="App">
-            <NavbarNav clearLocalStorage={clearToken}/>
+            <NavbarNav clearLocalStorage={clearToken} token={sessionToken}/>
             {protectedViews()}
-            <div className="footer">FOOTER HERE</div>
+            <Footer />
         </div>
     );
 }
@@ -42,5 +43,6 @@ function App() {
 export default App;
 
 /*
+
 
 */

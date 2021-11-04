@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Button, Modal, Form, Image } from 'react-bootstrap';
+import { Card, Button, Modal, Form, Image, CardGroup } from 'react-bootstrap';
 import './recipe.css';
-import bookmark from './bookmark-1.png';
+import bookmark from './bookmark-4.png';
 import share from './share-2.png';
 import recipe from './link-3.png';
 
 const Recipe = (props) => {
-    console.log(props)
     const { label, image, url, totalTime, calories, ingredientLines } = props.recipe;
     const caloriesRounded = calories.toFixed(0);
     const [Item, setItem] = useState([]);
+    console.log("THIS",props)
 
     const handleSubmit = (event) => {
         event.preventDefault();
         var AddItem = event.target.value;
         console.log(AddItem)
+        console.log(props.token)
 
         fetch('http://localhost:4000/grocerylist/create', {
             method: 'POST',
@@ -35,11 +36,10 @@ const Recipe = (props) => {
     
     return (
       <div>
-            <Card style={{border:"none",boxShadow:"2px 5px 5px #000000",minHeight:"450px"}}>
+            <Card style={{border:"none",boxShadow:"2px 5px 5px #000000",height:"500px",width:"300px"}}>
                 <Card.Img src={image} alt={label} className="card-img-top"/>
                 <Card.Body className="card-body">
-                    <Card.Title className="cardTITLE">
-                        {label}</Card.Title>
+                    <h5 className="cardTITLE">{label}</h5>
                 </Card.Body>
                 <Card.Footer style={{backgroundColor:"white", border:"none"}}>
                         <a href={url} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", fontWeight:"bolder"}}>
@@ -48,7 +48,9 @@ const Recipe = (props) => {
                             <Image className="recipe-icon" src={share} style={{height:"35px", padding:"5px"}}/></a>
                         <a href={url} target="_blank" rel="noopener noreferrer" style={{margin:"10px"}}>
                             <Image className="recipe-icon" src={recipe} style={{height:"35px", padding:"5px"}}/></a>
-                    <Button onClick={handleShow} variant="custom">View Ingredients</Button>
+                </Card.Footer>
+                <Card.Footer style={{backgroundColor:"white", border:"none"}}>
+                    <Button onClick={handleShow} variant="custom" style={{color:"whitesmoke"}}>View Ingredients</Button>
                 </Card.Footer>      
             </Card>
 
@@ -72,7 +74,7 @@ const Recipe = (props) => {
                 </Modal.Body>
                 
             </Modal>
-        
+    
       </div>  
     );
 };
