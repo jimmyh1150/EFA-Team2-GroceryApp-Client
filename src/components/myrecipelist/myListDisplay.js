@@ -1,31 +1,31 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
+import APIURL from "../../helpers/environment";
 
 const DisplayMyList = (props) => {
-    const [allItems, setAllItems] = useState([]);
-     
-    console.log(allItems);
+  const [allItems, setAllItems] = useState([]);
 
-    fetch('http://localhost:4000/mylist/mylist', {
-        method: 'GET',
-        headers: new Headers ({
-            'Content-Type': 'application/json',
-            'Authorization': props.token
-        })
-    })
-    .then(response => response.json())
-    .then(json => setAllItems(json))
-    .catch(err => console.log(err))
+  console.log(allItems);
 
-    return (
-        <div>
-            <ul>
-            {allItems.map((recipeName => (
-                <li>{recipeName.recipeName}</li>
-            )))}
-            </ul>
-        </div>
-    )
+  fetch(`${APIURL}/mylist/mylist`, {
+    method: "GET",
+    headers: new Headers({
+      "Content-Type": "application/json",
+      Authorization: props.token,
+    }),
+  })
+    .then((response) => response.json())
+    .then((json) => setAllItems(json))
+    .catch((err) => console.log(err));
 
-}
+  return (
+    <div>
+      <ul>
+        {allItems.map((recipeName) => (
+          <li>{recipeName.recipeName}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default DisplayMyList;
