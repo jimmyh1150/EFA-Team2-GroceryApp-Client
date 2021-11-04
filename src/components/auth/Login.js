@@ -72,9 +72,7 @@ const Auth = (props) => {
           password: password,
         };
 
-    let url = login
-      ? `${APIURL}:4000/user/login`
-      : `${APIURL}:4000/user/register`;
+    let url = login ? `${APIURL}/user/login` : `${APIURL}/user/register`;
 
     fetch(url, {
       method: "POST",
