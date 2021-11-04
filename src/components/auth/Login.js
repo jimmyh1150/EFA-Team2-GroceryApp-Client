@@ -75,13 +75,13 @@ const handleSubmit = event => {
     return (
         <div>
             <form>
-                <button onClick={loginToggle}>Login / Signup Toggle</button>
+                <button onClick={loginToggle}>Login / Signup</button>
                 <br/>
                 <h1>{title()}</h1>
                 {signupFields()}
                 <label html4="email">Email</label>
                 <br/>
-                <input type='text' id="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                <input type='email' id="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                 <br/>
                 <label html4="password">password</label>
                 <br/>
