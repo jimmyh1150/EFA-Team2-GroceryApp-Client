@@ -4,6 +4,10 @@ import NavbarNav from './components/navbar/Navbar';
 import Auth from './components/auth/Login';
 import RecipeSearch from './components/recipesearch/RecipeSearch';
 
+
+
+
+
 function App() {
 
     const [sessionToken, setSessionToken] = useState(undefined);

@@ -6,18 +6,19 @@ import bookmark from './bookmark-1.png';
 import share from './share-2.png';
 import recipe from './link-3.png';
 
-const Auth = (props) => {
-    console.log(props)
-    const { image, url,  } = props.login;
+const Recipe = (props) => {
+    const { label, image, url, totalTime, calories, ingredientLines } = props.recipe;
     const caloriesRounded = calories.toFixed(0);
     const [Item, setItem] = useState([]);
+    console.log("THIS",props)
 
     const handleSubmit = (event) => {
         event.preventDefault();
         var AddItem = event.target.value;
         console.log(AddItem)
+        console.log(props.token)
 
-        fetch('http://localhost:4000/auth/login.js', {
+        fetch('http://localhost:4000/grocerylist/create', {
             method: 'POST',
             body: JSON.stringify({grocerylist: {item: AddItem}}),
             headers: new Headers ({
@@ -72,8 +73,8 @@ const Auth = (props) => {
                 </Modal.Body>
                 
             </Modal>
-        
-      </div> 
+    
+      </div>  
     );
 };
 
