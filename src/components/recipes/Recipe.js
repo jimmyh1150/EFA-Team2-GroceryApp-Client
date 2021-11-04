@@ -74,7 +74,6 @@ const Recipe = (props) => {
                 </Modal.Body>
                 
             </Modal>
-    
       </div>  
     );
 };
