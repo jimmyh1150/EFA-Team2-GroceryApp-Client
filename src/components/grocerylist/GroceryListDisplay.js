@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 const DisplayList = (props) => {
     const [Items, setItems] = useState([])
+    
 
     const deleteItem = (Item) => {
         console.log("ItemID:",Item.id)
@@ -21,16 +22,22 @@ const DisplayList = (props) => {
     }
 
     return (
-        <ol style={{textAlign:"left"}}>
-            { props.Items.map((Item) => 
-                <div style={{alignItems:"left"}}>
-                <li htmlFor={Item.item}>
-                    <button onClick={() => deleteItem(Item)}>-</button> {Item.item}
-                </li>
-                </div>
-            )}
-        </ol>
-    )
+        <div>
+            <ol style={{textAlign:"left"}}>
+                { props.Items.map((Item) => 
+                    <div style={{alignItems:"left"}}>
+                        <li htmlFor={Item.item} style={{padding:"1px"}}>
+                            <button onClick={() => deleteItem(Item)} style={{borderRadius:"5px",background:"#0075A2",border:"none",fontWeight:"bolder",color:"whitesmoke"}}
+                            >-</button> {Item.item}
+                        </li>
+
+                    </div>
+                )}
+            </ol>
+            
+    
+    
+    </div>)
 }
 
 export default DisplayList;

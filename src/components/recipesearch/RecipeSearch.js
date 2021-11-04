@@ -1,12 +1,12 @@
 import './Recipes.css';
 import React, {useState, useEffect, useRef, useMemo} from "react";
 import Recipe from '../recipes/Recipe.js';
-import { Row, Col } from 'react-bootstrap';
 import GroceryList from '../grocerylist/GroceryList';
 import ListIcon from '../assets/list-2.png';
-
+import {Button} from 'react-bootstrap';
 
 const RecipeSearch = (props) => {
+  console.log(props)
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch]= useState('');
   const [query, setQuery] = useState('');
@@ -101,35 +101,46 @@ const RecipeSearch = (props) => {
           </form>
         </div>
         <br/>      
-        <div className="recipeList">
-        {paginatedRecipes?.length >0 && (
-              <>
+        <div className="recipeList" style={{alignItems:"center"}}>
+          {paginatedRecipes?.length >0 && (
+              
+              <div token={props.token} style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
               {paginatedRecipes.map((recipe, index) => (
-                <Recipe recipe={recipe.recipe} key={index} />
+                    <Recipe recipe={recipe.recipe} key={index} token={props.token} />
               ))}
-            </>
+              </div>
+         
         )}
         {paginatedRecipes.length === 0 && !!query && (
           <div>No recipes found. Please try another search.</div>
         )}
+        <div>
         {paginatedRecipes?.length > 0 && ( <div>
           {/* <button onClick={() => setPagination(0)}>{'<<<'}</button> */}
-          <button onClick={prevClick}>Prev</button>
-          <button onClick={nextClick}>Next</button>
+          <Button onClick={prevClick} style={{marginBottom:"30px",backgroundColor:"#0075A2",border:"none"}}>Prev</Button>
+          
+          <Button onClick={nextClick}style={{backgroundColor:"#0075A2",border:"none"}}>Next</Button>
           {/* <button onClick={handleNavigateLastPage}>{'>>>'}</button> */}
           </div>
         )}
+        </div>
         <div style={{position:"fixed",bottom:"30px",right:"35px"}}>
             {visible && 
-              <div style={{backgroundColor:"#EFF8E2",position:"absolute",bottom:"70px",right:"0",borderRadius:"15px 0 0 15px",height:"500px",transition:"all 1.5s ease-in-out"}}>
-                  <div>My Grocery List</div>
-                  <GroceryList/>
+              <div style={{backgroundColor:"#EFF8E2",position:"absolute",bottom:"70px",right:"0",
+                  borderRadius:"15px",height:"500px",transition:"all 5.5s ease-in-out",width:"400px",boxShadow:"2px 25px 25px #000000"}}>
+                  <h5 style={{marginTop:"10px"}}>My Grocery List</h5>
+                  <hr style={{width:"50%",margin:"auto",marginTop:"10px",marginBottom:"10px"}}/>
+                  <p><i>Click the button to delete it from the list</i></p>
+                  <GroceryList token={props.token}/>
               </div>}
             <button onClick={() => setVisible(!visible)} className="listBTN">
               <img src={ListIcon} className="ListIcon" alt="list"/></button>
         </div>
       </div>
+      <br/>
+      <br/>
       </div>
+      
     );
 };
 
