@@ -89,7 +89,6 @@ const handleSubmit = event => {
     return (
         <div className="Background_IMG" >
         
-
       <form>
       <Button style={{backgroundColor: 'brown'}} type="submit" onClick={loginToggle}>Login / Signup</Button>
         <br />
