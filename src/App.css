@@ -1,6 +1,15 @@
 .App {
   text-align: center;
   background-color: #483D3F;
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: max-content 1fr max-content;
+}
+
+.login-page {
+  display: grid;
+  align-items: center;
+  justify-items: center;
 }
 
 .App-logo {

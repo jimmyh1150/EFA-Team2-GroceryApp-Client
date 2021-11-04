@@ -1,47 +1,45 @@
-import './App.css';
-import React, {useState, useEffect, useRef} from "react";
-import NavbarNav from './components/navbar/Navbar';
-import Auth from './components/auth/Login';
-import RecipeSearch from './components/recipesearch/RecipeSearch';
+import "./App.css";
+import React, { useState, useEffect, useRef } from "react";
+import NavbarNav from "./components/navbar/Navbar";
+import Auth from "./components/auth/Login";
+import RecipeSearch from "./components/recipesearch/RecipeSearch";
+import { AUTH_TOKEN_KEY } from "./constants";
 
 function App() {
+  const [sessionToken, setSessionToken] = useState(
+    localStorage.getItem(AUTH_TOKEN_KEY)
+  );
 
-    const [sessionToken, setSessionToken] = useState(undefined);
+  const isAuthenticated = true; // !!sessionToken;
 
-    useEffect(() => {
-      if(localStorage.getItem('token')){
-        setSessionToken(localStorage.getItem('token'))
-      }
-    }, []) 
-
-    const updateToken = (newToken) => {
-      localStorage.setItem('token', newToken);
-      setSessionToken(newToken);
-    };
-
-    const clearToken = () => {
-      localStorage.clear();
-      setSessionToken('');
-    };
-
-    const protectedViews = () => {
-        return (sessionToken === localStorage.getItem('token') ? 
-        <RecipeSearch token={sessionToken} /> : <Auth updateToken={updateToken}/> 
-        )
+  const updateToken = (newToken) => {
+    if (!newToken) {
+      return;
     }
+    localStorage.setItem(AUTH_TOKEN_KEY, newToken);
+    setSessionToken(newToken);
+  };
 
-    return (
-        <div className="App">
-            <NavbarNav clearLocalStorage={clearToken}/>
-            {protectedViews()}
-            <div className="footer">FOOTER HERE</div>
-        </div>
+  const clearToken = () => {
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+    setSessionToken(undefined);
+  };
+
+  const protectedViews = () => {
+    return isAuthenticated ? (
+      <RecipeSearch token={sessionToken} />
+    ) : (
+      <Auth updateToken={updateToken} />
     );
+  };
+
+  return (
+    <div className="App">
+      <NavbarNav onLogout={clearToken} isAuthenticated={isAuthenticated} />
+      {protectedViews()}
+      <div className="footer">FOOTER HERE</div>
+    </div>
+  );
 }
 
 export default App;
-
-/*
-
-
-*/
